@@ -69,7 +69,6 @@ public class MessagesDAO {
 
             PreparedStatement ps = null;
 
-
             String query = "DELETE FROM messages WHERE id_message = ?";
             ps = connection.prepareStatement(query);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -88,6 +87,32 @@ public class MessagesDAO {
     }
 
     public static void updateMessageDB(Messages messages){
+
+
+        ConnectionDB connectDB = new ConnectionDB();
+
+        try(Connection connection = connectDB.getConnection()){
+
+            PreparedStatement ps = null;
+
+            try{
+
+                String query = "UPDATE messages SET message = ? WHERE id_message = ?";
+                ps = connection.prepareStatement(query);
+                ps.setString(1, messages.getMessage());
+                ps.setInt(2, messages.getId_message());
+                ps.executeUpdate();
+                System.out.println("successfully updated message");
+
+            }catch (SQLException exception){
+                System.out.println(exception);
+                System.out.println("message could not be updated");
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

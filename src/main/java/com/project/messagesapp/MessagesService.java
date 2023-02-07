@@ -36,6 +36,16 @@ public class MessagesService {
     }
 
     public static void updateMessages(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Write the new message");
+        String message = sc.nextLine();
 
+        System.out.println("Type the id of the message you want to be updated");
+        int id_message = sc.nextInt();
+        Messages update = new Messages();
+        update.setId_message(id_message);
+        update.setMessage(message);
+
+        MessagesDAO.updateMessageDB(update);
     }
 }
