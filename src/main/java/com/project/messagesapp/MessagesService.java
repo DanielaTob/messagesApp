@@ -22,11 +22,16 @@ public class MessagesService {
         MessagesDAO.createMessageDB(register);
     }
 
-    public static void readMessages(){
+    public static void readMessages() throws SQLException {
+        MessagesDAO.readMessagesDB();
 
     }
 
-    public static void deleteMessages(){
+    public static void deleteMessages() throws SQLException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Type the id of the message you want to be deleted");
+        int id_message = sc.nextInt();
+        MessagesDAO.deleteMessageDB(id_message);
 
     }
 
